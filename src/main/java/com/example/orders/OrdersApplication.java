@@ -2,13 +2,19 @@ package com.example.orders;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
+@RestController
 public class OrdersApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrdersApplication.class, args);
-		int x = 0;
-		int y = 1;
+
+	}
+	@GetMapping
+	public String helloWorld(){
+		return "hello task spring boot";
 	}
 }
