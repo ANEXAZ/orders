@@ -13,8 +13,4 @@ public class OrdersApplication {
 		SpringApplication.run(OrdersApplication.class, args);
 
 	}
-	@GetMapping
-	public String helloWorld(){
-		return "hello task spring boot";
-	}
 }
