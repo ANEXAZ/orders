@@ -1,48 +1,58 @@
 package com.example.orders;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import org.jspecify.annotations.Nullable;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
+import java.util.Map;
 
 @Entity
+@Table(name = "users")
 public class UserOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private @Nullable Integer id;
 
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdDate;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "details", columnDefinition = "json")
+    private Map<String, Object> orderDetails;
+
     private String customerName;
     private String productName;
-
     private int quantity;
+    private double price;
 
-    public int getQuantity() {
-        return quantity;
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
-
-    public String getProductName() {
-        return productName;
+    public @Nullable Integer getId() {
+        return id;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setId(@Nullable Integer id) {
+        this.id = id;
     }
 
-    public @Nullable String getDescription() {
-        return description;
+    public Map<String, Object> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setDescription(@Nullable String description) {
-        this.description = description;
+    public void setOrderDetails(Map<String, Object> orderDetails) {
+        this.orderDetails = orderDetails;
     }
-
-    private @Nullable String description;
 
     public String getCustomerName() {
         return customerName;
@@ -52,13 +62,29 @@ public class UserOrder {
         this.customerName = customerName;
     }
 
-
-    public Integer getId() {
-        return id;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
 }
 
