@@ -5,14 +5,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.jspecify.annotations.Nullable;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
 @Entity
 @Table(name = "users")
-public class UserOrder {
+public class CreateOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private @Nullable Integer id;
