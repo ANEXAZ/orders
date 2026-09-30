@@ -14,7 +14,7 @@ import java.util.Map;
 @Table(name = "users")
 public class UserOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private @Nullable Integer id;
 
     @CreationTimestamp
