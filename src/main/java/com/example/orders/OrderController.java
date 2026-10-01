@@ -1,5 +1,7 @@
 package com.example.orders;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,4 +32,19 @@ public class OrderController {
     public ResponseEntity<OrderItem> getUserById(@PathVariable("id") Long id) {
         return orderRepository.findById(Math.toIntExact(id)).map(user -> ResponseEntity.ok().body(user)).orElse(ResponseEntity.notFound().build());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteOrder(@PathVariable Integer id){
+        try{
+            boolean exists = orderRepository.existsById(id);
+            if (!exists) {
+                return ResponseEntity.status(404).body("Order not Found");
+            }
+            orderRepository.deleteById(id);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(500).body("Error" + e.getMessage());
+        }
+        return ResponseEntity.ok("Order deleted successfully");
+    }
+
 }
