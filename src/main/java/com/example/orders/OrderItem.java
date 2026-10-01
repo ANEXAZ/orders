@@ -3,10 +3,6 @@ package com.example.orders;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.jspecify.annotations.Nullable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
 
@@ -21,6 +17,9 @@ public class OrderItem {
     private LocalDateTime createdDate;
 
     private String customerName;
+    private String productName;
+    private int quantity;
+    private double price;
 
     public String getProductName() {
         return productName;
@@ -69,8 +68,4 @@ public class OrderItem {
     public void setPrice(double price) {
         this.price = price;
     }
-
-    private String productName;
-    private int quantity;
-    private double price;
 }
