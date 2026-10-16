@@ -1,5 +1,6 @@
 package com.example.orders;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +45,11 @@ public class OrderController {
             return ResponseEntity.status(500).body("Error" + e.getMessage());
         }
         return ResponseEntity.ok("Order deleted successfully");
+    }
+
+    @GetMapping("/search")
+    public Iterable<OrderItem> searchOrders(@RequestParam("query") String query) {
+
+        return orderRepository.searchOrders(query);
     }
 }
