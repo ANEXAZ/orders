@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController //This class is a Controller
 @RequestMapping(path = "/orders") // This is URL's start with /orders (after Application path)
 public class OrderController {
