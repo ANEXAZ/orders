@@ -7,5 +7,4 @@ public interface OrderRepository extends CrudRepository<OrderItem, Integer> {
     @Query("SELECT o FROM OrderItem o WHERE o.productName LIKE %:keyword% OR o.customerName LIKE %:keyword%")
     Iterable<OrderItem> searchOrders(String keyword);
 
-
 }
