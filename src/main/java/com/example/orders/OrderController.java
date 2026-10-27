@@ -1,6 +1,8 @@
 package com.example.orders;
 
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +23,6 @@ public class OrderController {
         OrderItem newOrder = orderRepository.save(user);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(newOrder);
     }
-
-    @GetMapping
-    public Iterable<OrderItem> getAllUserOrders() {
-        return orderRepository.findAll();
-    }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<OrderItem> getUserById(@PathVariable("id") Long id) {
@@ -52,4 +48,16 @@ public class OrderController {
 
         return orderRepository.searchOrders(query);
     }
+
+        @GetMapping
+        public Page<OrderItem> getOrders(
+                @RequestParam(defaultValue = "0") int page,
+                @RequestParam(defaultValue = "10") int size){
+
+        Pageable pageable = PageRequest.of(page,size);
+        Page<OrderItem> result = orderRepository.findAll(pageable);
+
+
+            return result;
+        }
 }
